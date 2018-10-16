@@ -1,6 +1,37 @@
 ﻿#pragma strict
 
-var stageNum = 1;
+
+//게임 오브젝트
+var ball: Transform;
+
+
+//점수 처리
+var txtScore: GUIText;
+var txtStage: GUIText;
+var txtTryAgain: GUIText;
+
+//게임에 필요한 변수
+static var ballCnt = 3;
+
+private var stageCnt = 5;
+private var stageNum = 1;
+private var score = 0;
+
+//외부 모듈과 공용 변수
+enum STATE { STAGE, RESET, HIT, DESTROY, OUT, IDLE, READY, DEMO };
+
+static var state: STATE = STATE.STAGE;
+static blockNum: int;
+static blockPos: Vector3;
+
+
+//------------------------
+//순환루프
+//------------------------
+
+function Update() {
+
+}
 
 function Start() {
     MakeStage();
@@ -8,7 +39,7 @@ function Start() {
 
 
 function MakeStage() {
-
+    
 	var px = -2.82;
     var py = 4.27;
     var pz = 4.35;
@@ -42,5 +73,65 @@ function MakeStage() {
   
 }
 
+//------------------------
+//ball 초기화
+//------------------------
+
+function ResetPosition() {
+
+}
+
+//------------------------
+//ball out 처리
+//------------------------
+
+function SetOut() {
+
+}
+
+//------------------------
+//점수처리- 블록 남아 있음
+//------------------------
+
+function SetHit() {
 
 
+}
+
+//------------------------
+//블록 파괴함
+//------------------------
+function SetDestroy() {
+
+}
+
+//------------------------
+//남은 블록 수 계산
+//------------------------
+
+function GetBlockCount() {
+
+}
+
+//------------------------
+//Clear Stage
+//------------------------
+
+function ClearStage() {
+
+}
+
+//------------------------
+//스코어 등 화면 표시
+//------------------------
+
+function OnGUI() {
+
+}
+
+//------------------------
+//try again?
+//------------------------
+function ShowMessage() {
+
+}
