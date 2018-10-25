@@ -2,7 +2,7 @@
 
 
 //게임 오브젝트
-var ball: Transform;
+//var ball: Transform;
 
 
 //점수 처리
@@ -21,8 +21,8 @@ private var score = 0;
 enum STATE { STAGE, RESET, HIT, DESTROY, OUT, IDLE, READY, DEMO };
 
 static var state: STATE = STATE.STAGE;
-static blockNum: int;
-static blockPos: Vector3;
+static var blockNum: int;
+static var blockPos: Vector3;
 
 
 //------------------------
@@ -39,38 +39,38 @@ function Start() {
 
 
 function MakeStage() {
-    
-	var px = -2.82;
+
+    var px = -2.82;
     var py = 4.27;
     var pz = 4.35;
-	var w = 1;
-	var h = 1;
+    var w = 1;
+    var h = 1;
 
 
-	var tmp = jsStage.Stage[stageNum - 1];
+    var tmp = jsStage.Stage[stageNum - 1];
 
-	for (var i = 0; i < 4; i++) {
-		var s : String = tmp[i];
-		var x = px;
+    for (var i = 0; i < 4; i++) {
+        var s: String = tmp[i];
+        var x = px;
 
-		for (var j = 0; j < s.length; j++) {
-			var ch = s.Substring(j, 1);
-			if(ch =="." || ch == " ") {
-				x += w;
-				continue;
-			}
+        for (var j = 0; j < s.length; j++) {
+            var ch = s.Substring(j, 1);
+            if (ch == "." || ch == " ") {
+                x += w;
+                continue;
+            }
 
-			var block : GameObject = Instantiate(Resources.Load("Prefabs/pf_block" + ch, GameObject));
+            var block: GameObject = Instantiate(Resources.Load("Prefabs/pf_block" + ch, GameObject));
 
-			block.transform.position = Vector3(x,py,pz);
-			x += w;
-		};
+            block.transform.position = Vector3(x, py, pz);
+            x += w;
+        };
 
-		py -= h;
-	}
+        py -= h;
+    }
 
 
-  
+
 }
 
 //------------------------

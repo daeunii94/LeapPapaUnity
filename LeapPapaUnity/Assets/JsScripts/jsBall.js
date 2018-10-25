@@ -2,6 +2,8 @@
 
 static var speed = 5.5;
 
+
+
 function OnTriggerEnter(coll: Collider) {
     var flag = true;
 
@@ -14,16 +16,22 @@ function OnTriggerEnter(coll: Collider) {
         Bounce(coll);
         coll.gameObject.SendMessage("SetCollision", flag, SendMessageOptions.DontRequireReceiver);
     }
+}
 
-    
 
+function OnCollisionEnter(coll: Collision) {
+    var flag = true;
+
+    if (coll.collider.gameObject.tag == "BLOCK") {
+        coll.collider.gameObject.SendMessage("SetCollision", flag, SendMessageOptions.DontRequireReceiver);
+        
+    }
 
 }
 
 function Bounce(coll: Collider) {
-    coll.isTrigger = false;
-}
 
+}
 function CheckBounds(coll: Collider) {
     if (coll.tag == "CEILING") {
 
