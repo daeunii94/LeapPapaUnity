@@ -2,29 +2,18 @@
 
 static var speed = 5.5;
 
-
-
-function OnTriggerEnter(coll: Collider) {
+function OnCollisionEnter(coll: Collision) { 
     var flag = true;
 
-    if (coll.tag == "FENCE" || coll.tag == "CEILING") {
-
-        CheckBounds(coll);
-
-
-    } else if (coll.gameObject.tag == "BLOCK") {
-        Bounce(coll);
-        coll.gameObject.SendMessage("SetCollision", flag, SendMessageOptions.DontRequireReceiver);
-    }
-}
-
-
-function OnCollisionEnter(coll: Collision) {
-    var flag = true;
 
     if (coll.collider.gameObject.tag == "BLOCK") {
         coll.collider.gameObject.SendMessage("SetCollision", flag, SendMessageOptions.DontRequireReceiver);
-        
+        //Physics.gravity.z -= 0.2;
+        //if (Physics.gravity.x > 0) {
+        //    Physics.gravity.x -= 6;
+        //} else {
+        //    Physics.gravity.x += 6;
+        //}
     }
 
 }
