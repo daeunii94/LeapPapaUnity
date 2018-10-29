@@ -19,10 +19,14 @@ function OnCollisionEnter(coll: Collision) {
 }
 
 function SetCollision(flag: boolean) {
-    
+
     GetComponent.<Rigidbody>().constraints = RigidbodyConstraints.None;
     
-    Destroy(gameObject, 1.5);
-    
+    yield WaitForSeconds(0.000000001);
+
+    Destroy(gameObject);
+
+    jsGameManager.state = STATE.COUNT;
+
 }
 

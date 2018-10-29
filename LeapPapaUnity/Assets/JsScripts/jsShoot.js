@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 var ball : GameObject;
-var power = 5;
+var power = 1;
 
 
 function Update() {

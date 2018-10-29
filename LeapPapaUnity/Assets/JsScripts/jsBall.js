@@ -24,6 +24,7 @@ function OnCollisionEnter(coll: Collision) {
 function Bounce(coll: Collider) {
 
 }
+
 function CheckBounds(coll: Collider) {
     if (coll.tag == "CEILING") {
 

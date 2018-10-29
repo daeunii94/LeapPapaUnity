@@ -18,7 +18,7 @@ private var stageNum = 1;
 private var score = 0;
 
 //외부 모듈과 공용 변수
-enum STATE { STAGE, RESET, HIT, DESTROY, OUT, IDLE, READY, DEMO };
+enum STATE {STOP, COUNT, STAGE, RESET, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO};
 
 static var state: STATE = STATE.STAGE;
 static var blockNum: int;
@@ -28,6 +28,38 @@ static var blockPos: Vector3;
 //------------------------
 //순환루프
 //------------------------
+function Update () {
+	// 현재 상태 처리	
+	switch (state) {
+		case STATE.STOP :
+			break;
+		// case STATE.STAGE :		// 스테이지 만들기
+		// 	MakeStage();
+		// 	break;
+		case STATE.COUNT :
+			countScore();
+			break;
+		// case STATE.RESET :		// 패들, 공 초기위치로 이동
+		// 	ResetPosition();
+		// 	break;
+		// case STATE.HIT :		// 볼과 공의 충돌 - 블록 남아 있음
+		// 	SetHit();
+		// 	break;
+		// case STATE.DESTROY :	// 블록이 파괴됨
+		// 	SetDestroy();
+		// 	break;
+		// case STATE.OUT :		// 공을 잃음
+		// 	SetOut();
+		// 	break;
+		// case STATE.BONUS :		// 보너스 처리
+		// 	ProcessBonus();
+		// 	break;
+	}		
+	
+	// print("State = " + state);	// 디버그용
+}
+
+
 function OnGUI() {
 	var w = Screen.width;
 	var h = Screen.height;
@@ -51,36 +83,16 @@ function OnGUI() {
 
 }
 
-
-function Update() {
-	// 현재 상태 처리
-	switch(state){
-		/*case STATE.STAGE :
-			MakeStage();
-			break; 
-		case STATE.RESET :
-			ResetPosition();
-			break;
-		case STATE.DESTROY :
-			SetDestroy();
-			break;
-		case STATE.OUT :
-			SetOut();
-			break;
-		case STATE.BONUS :
-			ProcessBonus();
-			break;
-		*/
-		}
-
-		print("State = " + state);
-
-}
-
 function Start() {
     MakeStage();
 }
 
+function countScore() {
+	score += 1;
+	state = STATE.STOP;
+	return;
+
+}
 
 function MakeStage() {
 
@@ -152,16 +164,16 @@ function SetHit() {
 //------------------------
 function SetDestroy() {
 	state = STATE.IDLE;
+
 	score += (500 * blockNum);
-	if (jsBall.speed < 10){
-		jsBall.speed += 0.05; // 공의 속도 증가시키기
-	}
+	// if (jsBall.speed < 10)
+	// 	jsBall.speed += 0.05; // 공의 속도 증가시키기
+	
 
 	if (GetBlockCount() == 0){
 		stageNum++;
-		ClearStage();
-
-		state = STATE.STAGE;
+		// ClearStage();
+		// state = STATE.STAGE;
 		return;
 	}
 
