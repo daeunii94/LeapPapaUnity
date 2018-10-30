@@ -8,8 +8,9 @@ function OnCollisionEnter(coll: Collision) {
     var flag = true;
 
 
-    if (coll.collider.gameObject.tag == "BLOCK") {
-        coll.collider.gameObject.SendMessage("SetCollision", flag, SendMessageOptions.DontRequireReceiver);
+    if (coll.collider.gameObject.tag == "BLOCK1") {
+        if(jsGameManager.state != STATE.DEMO) 
+            coll.collider.gameObject.SendMessage("SetCollision", flag, SendMessageOptions.DontRequireReceiver);
      
         //Physics.gravity.z -= 0.2;
         //if (Physics.gravity.x > 0) {
