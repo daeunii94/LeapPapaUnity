@@ -1,10 +1,13 @@
 ﻿#pragma strict
 
+
 static var MinimumSpeed = 25;
 static var MaximumSpeed = 30;
 
 static var MinimumVerticalMovement = 0.1F;
 private var hasBeenLaunched = true;
+
+
 
 // function Update() {
 //     if(hasBeenLaunched) {
@@ -42,8 +45,12 @@ private var hasBeenLaunched = true;
 
 
 function OnCollisionEnter(coll: Collision) { 
+
     var flag = true;
 
+    var audio : AudioSource;
+    audio = gameObject.GetComponent(AudioSource);
+    audio.Play();
 
     if (coll.collider.gameObject.tag == "BLOCK1") {
         if(jsGameManager.state != STATE.DEMO) 
@@ -64,7 +71,8 @@ function OnCollisionEnter(coll: Collision) {
         ball.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 100);
 
     }
-
+    
+   
 }
 
 
