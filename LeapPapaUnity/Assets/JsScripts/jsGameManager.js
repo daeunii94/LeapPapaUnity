@@ -99,11 +99,17 @@ function Start() {
 // }
 
 function MakeStage() {
+
 	var n = stageNum % stageCnt;
 	if(n == 0)
 		n = stageCnt;
 
-
+	if (stageNum > 1){
+		var nextStage = GameObject.Find("nextStage") ;
+    	var audio : AudioSource;
+    	audio = nextStage.gameObject.GetComponent(AudioSource);
+    	audio.Play();
+	}
     var px = -2.82;
     var py = 4.27;
     var pz = 4.35;
@@ -175,6 +181,10 @@ function SetOut() {
 
 function SetHit() {
 	//state = STATE.IDLE;
+	
+	// var block : GameObject = GameObject.Find("Block1");
+	
+
 	score += (50 * stageNum);
 	
 	// if (jsBall.speed < 10){
@@ -187,7 +197,9 @@ function SetHit() {
 		state = STATE.STAGE;
 		return;
 	}
+
 	state = STATE.IDLE;
+
 }
 
 //------------------------
