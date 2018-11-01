@@ -2,7 +2,6 @@
 import UnityEngine.UI;
 
 //게임 오브젝트
-var ball: Transform;
 
 
 //점수 처리
@@ -18,7 +17,7 @@ private var stageNum = 1;
 private var score = 0;
 
 //외부 모듈과 공용 변수
-enum STATE {STOP, COUNT, STAGE, RESET, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO};
+enum STATE {STOP, STAGE, RESET, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO};
 
 static var state: STATE = STATE.STAGE;
 static var blockNum: int;
@@ -33,21 +32,19 @@ function Update () {
 	switch (state) {
 		case STATE.STOP :
 			break;
-		// case STATE.STAGE :		// 스테이지 만들기
-		// 	MakeStage();
-		// 	break;
-		case STATE.COUNT :
-			countScore();
-			break;
-		// case STATE.RESET :		// 패들, 공 초기위치로 이동
-		// 	ResetPosition();
-		// 	break;
-		// case STATE.HIT :		// 볼과 공의 충돌 - 블록 남아 있음
-		// 	SetHit();
-		// 	break;
-		// case STATE.DESTROY :	// 블록이 파괴됨
-		// 	SetDestroy();
-		// 	break;
+		case STATE.STAGE :		// 스테이지 만들기
+		 	MakeStage();
+		 	break;
+		
+		case STATE.RESET :		// 패들, 공 초기위치로 이동
+		 	ResetPosition();
+		 	break;
+		case STATE.HIT :		// 볼과 공의 충돌 - 블록 남아 있음
+		 	SetHit();
+		 	break;
+		case STATE.DESTROY :	// 블록이 파괴됨
+		 	SetDestroy();
+		 	break;
 		// case STATE.OUT :		// 공을 잃음
 		// 	SetOut();
 		// 	break;
@@ -56,7 +53,7 @@ function Update () {
 		// 	break;
 	}		
 	
-	// print("State = " + state);	// 디버그용
+	print("State = " + state);	// 디버그용
 }
 
 
@@ -75,6 +72,7 @@ function OnGUI() {
 	// stage & score
 	/*txtStage.text = "Stage : " + stageNum;
 	txtScore.text = "Score : " + score.ToString("n0");*/
+	
 	var txtStage = "Stage : " + stageNum;
 	var txtScore = "Score : " + score;
  	//txtStage.text = "Stage : ";
@@ -84,17 +82,27 @@ function OnGUI() {
 }
 
 function Start() {
-    MakeStage();
+    //MakeStage();
 }
 
-function countScore() {
-	score += 1;
-	state = STATE.STOP;
-	return;
+// function countScore() {
+// 	//score += 1;
+// 	score += 100;
+	
+// 	if (jsBall.speed < 10){
+// 		jsBall.speed += 0.05; // 공의 속도 증가시키기
+// 	}
+	
+// 	state = STATE.IDLE;
+// 	return;
 
-}
+// }
 
 function MakeStage() {
+	var n = stageNum % stageCnt;
+	if(n == 0)
+		n = stageCnt;
+
 
     var px = -2.82;
     var py = 4.27;
@@ -103,7 +111,7 @@ function MakeStage() {
     var h = 1;
 
 
-    var tmp = jsStage.Stage[stageNum - 1];
+    var tmp = jsStage.Stage[n - 1];
 
     for (var i = 0; i < 4; i++) {
         var s: String = tmp[i];
@@ -111,7 +119,8 @@ function MakeStage() {
 
         for (var j = 0; j < s.length; j++) {
             var ch = s.Substring(j, 1);
-            if (ch == "." || ch == " ") {
+			//var ch = 1;
+			if (ch == "." || ch == " ") {
                 x += w;
                 continue;
             }
@@ -122,8 +131,10 @@ function MakeStage() {
             x += w;
         };
 
+
         py -= h;
-    }
+	}
+	ResetPosition();
 
 
 
@@ -134,7 +145,20 @@ function MakeStage() {
 //------------------------
 
 function ResetPosition() {
+	var ball: GameObject = GameObject.Find("Ball");
 
+	
+
+	//ball.transform.position = Vector3(-0.07,3.63,-2.7);
+	ball.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 10);
+
+
+
+	var paddle : GameObject = GameObject.Find("Leap Motion Controller");
+	
+	ball.transform.position = Vector3(-0.07,3.63, paddle.transform.position.z + 0.5);
+
+	state = STATE.READY;
 }
 
 //------------------------
@@ -150,13 +174,20 @@ function SetOut() {
 //------------------------
 
 function SetHit() {
+	//state = STATE.IDLE;
+	score += (50 * stageNum);
+	
+	// if (jsBall.speed < 10){
+	// 	jsBall.speed += 0.05; // 공의 속도 증가시키기
+	// }
 
-	score += 100;
-	if (jsBall.speed < 10){
-		jsBall.speed += 0.05; // 공의 속도 증가시키기
+	if (GetBlockCount() == 0){
+		stageNum++;
+		ClearStage();
+		state = STATE.STAGE;
+		return;
 	}
 	state = STATE.IDLE;
-
 }
 
 //------------------------
@@ -165,15 +196,15 @@ function SetHit() {
 function SetDestroy() {
 	state = STATE.IDLE;
 
-	score += (500 * blockNum);
-	// if (jsBall.speed < 10)
+	score += (100 * blockNum);
+	//if (jsBall.speed < 10)
 	// 	jsBall.speed += 0.05; // 공의 속도 증가시키기
 	
 
 	if (GetBlockCount() == 0){
 		stageNum++;
-		// ClearStage();
-		// state = STATE.STAGE;
+		ClearStage();
+		state = STATE.STAGE;
 		return;
 	}
 
@@ -186,9 +217,9 @@ function SetDestroy() {
 
 function GetBlockCount() {
 	var cnt = 0;
-	for (var i = 1; i <= 4; i++){
-		cnt += GameObject.FindGameObjectsWithTag("BLOCK" + i).length;
-	}
+	//for (var i = 1; i <= 1; i++){
+		cnt += GameObject.FindGameObjectsWithTag("BLOCK1").length;
+	//}
 	return cnt; 
 }
 
@@ -198,19 +229,19 @@ function GetBlockCount() {
 
 function ClearStage() {
 	// speedBall 제거
-	var balls = GameObject.FindGameObjectsWithTag("BALL9");
-	for (var obj in balls){
-		Destroy(obj);
-	}
+	// var balls = GameObject.FindGameObjectsWithTag("BALL9");
+	// for (var obj in balls){
+	// 	Destroy(obj);
+	// }
 
 	// 남은 블록 삭제
 
-	for (var i = 1; i <= 4; i++){
-		var blocks = GameObject.FindGameObjectsWithTag("BLOCK" + i);
-		for (obj in blocks){
-			Destroy(obj);
-		}
-	}
+	// for (var i = 1; i <= 2; i++){
+	// 	var blocks = GameObject.FindGameObjectsWithTag("BLOCK" + i);
+	// 	for (obj in blocks){
+	// 		Destroy(obj);
+	// 	}
+	// }
 }
 
 //------------------------

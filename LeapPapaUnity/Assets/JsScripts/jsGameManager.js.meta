@@ -1,17 +1,12 @@
 fileFormatVersion: 2
 guid: 0787805e27fc6ae419a1bedaf60ceca2
-timeCreated: 1540799346
+timeCreated: 1540890589
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - ball: {fileID: 4014209809740188, guid: 554cfdef013bb6a46bed027b1edd7db5, type: 2}
-  - txtScore: {fileID: 132416554135404426, guid: 13d7e1defcc2dca4182566516cb11790,
-      type: 2}
-  - txtStage: {fileID: 132744872395519646, guid: 4351e9ab4c440114ca220d9644305327,
-      type: 2}
-  - txtTryAgain: {fileID: 132363663745867680, guid: e6244247bce6b744ba4b50e5e6bfe571,
-      type: 2}
+  - ball: {fileID: 4238620503764128, guid: 96bc32a880bb83e47a939ecd50b39a9c, type: 2}
+  - txtTryAgain: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

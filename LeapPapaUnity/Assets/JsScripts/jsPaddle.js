@@ -15,6 +15,8 @@ function Update () {
 function OnTriggerEnter(coll : Collider) {
 
     if(coll.gameObject.tag == "BALL") {
-        //coll.transform.rotation.eulerAngled
+        coll.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 50);
     }
+
+
 }
