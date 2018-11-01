@@ -17,9 +17,9 @@ private var stageNum = 1;
 private var score = 0;
 
 //외부 모듈과 공용 변수
-enum STATE {STOP, STAGE, RESET, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO};
+enum STATE {START, STOP, STAGE, RESET, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO};
 
-static var state: STATE = STATE.STAGE;
+static var state: STATE = STATE.START;
 static var blockNum: int;
 static var blockPos: Vector3;
 
@@ -27,7 +27,13 @@ static var blockPos: Vector3;
 //------------------------
 //순환루프
 //------------------------
+
 function Update () {
+	//if(Input.anyKey)
+	//{
+	//	Application.LoadLevel("mainScene"); //게임화면으로 전환
+	//	jsGameManager.state = STATE.STAGE;
+	//}
 	// 현재 상태 처리	
 	switch (state) {
 		case STATE.STOP :
@@ -60,7 +66,7 @@ function Update () {
 function OnGUI() {
 	var w = Screen.width;
 	var h = Screen.height;
-
+	
 	//남은 공 수 패들로 표시
 	//for (var i = 1; i <= ballCnt; i++){
 	//	var x = 22 * i - 17;
@@ -88,9 +94,9 @@ function OnGUI() {
 
 }
 
-function Start() {
+//function Start() {
     //MakeStage();
-}
+//}
 
 // function countScore() {
 // 	//score += 1;
