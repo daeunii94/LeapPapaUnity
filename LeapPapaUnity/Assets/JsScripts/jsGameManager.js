@@ -73,9 +73,19 @@ function OnGUI() {
 	/*txtStage.text = "Stage : " + stageNum;
 	txtScore.text = "Score : " + score.ToString("n0");*/
 	
+	// 이부분
 	var txtStage = "Stage : " + stageNum;
 	var txtScore = "Score : " + score;
+
  	//txtStage.text = "Stage : ";
+
+ // 	var txtStage = GameObject.Find("txtStage") ;
+	// var txtScore = GameObject.Find("txtScore") ;
+
+	// txtStage.text = "Stage : " + stageNum;
+	// txtScore.text = "Score : " + score;
+
+ 	// 이부분 
 	GUI.Label(new Rect(10,10,100,20), txtStage );
 	GUI.Label(new Rect(10,30,100,20), txtScore );
 
