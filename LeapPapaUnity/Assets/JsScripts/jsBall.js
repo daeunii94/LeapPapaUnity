@@ -30,6 +30,11 @@ function Update() {
 
     if(gameObject.GetComponent.<Rigidbody>().velocity.z < -8)
         gameObject.GetComponent.<Rigidbody>().velocity.z = -8;
+
+    if(gameObject.GetComponent.<Rigidbody>().velocity.z == 0.0) 
+        gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 70);
+
+    //if(gameObject.GetComponent.<Rigidbody>().)
 }
 
 
@@ -99,7 +104,7 @@ function OnCollisionEnter(coll: Collision) {
         print("들어옴1");
 
         print("오브젝트1:" + gameObject.name);
-        gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 200);
+        gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 300);
 
 
         //gameObject.GetComponent.<Rigidbody>().AddForce(force, ForceMode.Impulse);

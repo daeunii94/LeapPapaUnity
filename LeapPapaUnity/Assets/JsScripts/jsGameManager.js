@@ -175,8 +175,8 @@ function ResetPosition() {
 
 	var paddle : GameObject = GameObject.Find("Leap Motion Controller");
 	
-	ball.transform.position = Vector3(-0.07,3.63, paddle.transform.position.z + 0.5);
-
+	ball.transform.position = Vector3(-0.07,3.63, -2.89);
+	ball.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 1000);
 	state = STATE.READY;
 }
 
