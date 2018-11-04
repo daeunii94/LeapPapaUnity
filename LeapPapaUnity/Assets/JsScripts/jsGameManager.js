@@ -85,10 +85,8 @@ function OnGUI() {
 
  	//txtStage.text = "Stage : ";
 
- // 	var txtStage = GameObject.Find("txtStage");
- // 	txtStage.GetComponent.GUIText = "Stage : " + stageNum;
- // 	var txtScore = GameObject.Find("txtScore");
-	// txtScore.GetComponent.GUIText = "Score : " + score;
+ // 	GameObject.Find("txtStage").text = "Stage : " + stageNum;
+	// GameObject.Find("txtScore").text = "Score : " + score;
 
  	// 이부분 
 	GUI.Label(new Rect(10,10,100,20), txtStage );
@@ -177,11 +175,16 @@ function ResetPosition() {
 
 	var paddle : GameObject = GameObject.Find("Leap Motion Controller");
 	
+<<<<<<< HEAD
 	//ball.transform.position = Vector3(-0.07,3.63, paddle.transform.position.z + 0.5);
 	ball.transform.position = Vector3(-0.18,3.63, -1.11);
 
 
 
+=======
+	ball.transform.position = Vector3(-0.07,3.63, -2.89);
+	ball.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 1000);
+>>>>>>> f12b69ea351208618247ba5be41ff4bb1713c291
 	state = STATE.READY;
 }
 
