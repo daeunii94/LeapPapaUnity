@@ -13,5 +13,6 @@ function OnGUI(){
 	var h = Screen.height;
 
 	GUI.DrawTexture(Rect(0,0,w,h), Resources.Load("end"));
+	
 	GUI.Label(new Rect(10,30,100,20),"Your score is " + score);
 }
