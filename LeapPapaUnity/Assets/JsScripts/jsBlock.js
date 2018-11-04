@@ -17,7 +17,7 @@ function OnCollisionEnter(coll: Collision) {
 
     var bounceVector = Vector3.Reflect(coll.relativeVelocity, inNormal);
 
-    coll.collider.gameObject.GetComponent.<Rigidbody>().AddForce(bounceVector * force, ForceMode.VelocityChange);
+    //coll.collider.gameObject.GetComponent.<Rigidbody>().AddForce(bounceVector * force, ForceMode.VelocityChange);
 
     if (coll.collider.tag == "FLOOR") {
         gameObject.GetComponent.<Collider>().isTrigger = true;
