@@ -1,6 +1,7 @@
 ﻿#pragma strict
 import UnityEngine.UI;
-
+import UnityEngine;
+import System.Collections;
 //게임 오브젝트
 
 
@@ -14,10 +15,12 @@ static var ballCnt = 3;
 
 private var stageCnt = 5;
 private var stageNum = 1;
-private var score = 0;
+static var score = 0;
 
 //외부 모듈과 공용 변수
 enum STATE {START, STOP, STAGE, RESET, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO};
+
+
 
 static var state: STATE = STATE.START;
 static var blockNum: int;
@@ -37,6 +40,7 @@ function Update () {
 	// 현재 상태 처리	
 	switch (state) {
 		case STATE.STOP :
+			gameOver();
 			break;
 		case STATE.STAGE :		// 스테이지 만들기
 		 	MakeStage();
@@ -51,9 +55,10 @@ function Update () {
 		case STATE.DESTROY :	// 블록이 파괴됨
 		 	SetDestroy();
 		 	break;
-		// case STATE.OUT :		// 공을 잃음
-		// 	SetOut();
-		// 	break;
+		case STATE.OUT :		// 공을 잃음
+			SetOut();
+			break;
+
 		// case STATE.BONUS :		// 보너스 처리
 		// 	ProcessBonus();
 		// 	break;
@@ -94,6 +99,7 @@ function OnGUI() {
 
 }
 
+
 //function Start() {
     //MakeStage();
 //}
@@ -113,6 +119,7 @@ function OnGUI() {
 
 function MakeStage() {
 
+	
 	var n = stageNum % stageCnt;
 	if(n == 0)
 		n = stageCnt;
@@ -123,13 +130,23 @@ function MakeStage() {
     	audio = nextStage.gameObject.GetComponent(AudioSource);
     	audio.Play();
 	}
+
+	if (stageNum > 3){
+		state = STATE.STOP;
+	}
     var px = -2.82;
     var py = 4.27;
     var pz = 4.35;
     var w = 1;
     var h = 1;
 
+    //
+    // var ball: GameObject = GameObject.Find("Ball");
+    // if(ball.transform.position.x > px && ball.transform.position.y > py && ball.transform.position.z > pz){
+    // 	GUI.Label(new Rect(10,50,100,20),"나갓따" );
+    // }
 
+    //
     var tmp = jsStage.Stage[n - 1];
 
     for (var i = 0; i < 4; i++) {
@@ -157,6 +174,22 @@ function MakeStage() {
 
 
 
+}
+
+function gameOver(){
+
+	var musicSound = GameObject.Find("musicSound") ;
+    var audio : AudioSource;
+    audio = musicSound.gameObject.GetComponent(AudioSource);
+    audio.Stop();
+
+
+    Application.LoadLevel("endScene");
+
+	
+
+   	//transform.Translate(0, 0, 1000);
+   	//yield WaitForSeconds(0.5);
 }
 
 //------------------------
@@ -277,27 +310,27 @@ function ClearStage() {
 //------------------------
 //try again?
 //------------------------
-function ShowMessage() {
-	txtTryAgain.text = "Try Again? (y/n)";
-	do{
-		var isYes = Input.GetKeyUp(KeyCode.Y);
-		var isNo = Input.GetKeyUp(KeyCode.N);
+// function ShowMessage() {
+// 	txtTryAgain.text = "Try Again? (y/n)";
+// 	do{
+// 		var isYes = Input.GetKeyUp(KeyCode.Y);
+// 		var isNo = Input.GetKeyUp(KeyCode.N);
 
-		yield 0;
-	}while(!isYes && !isNo);
+// 		yield 0;
+// 	}while(!isYes && !isNo);
 
-	txtTryAgain.text = "";
+// 	txtTryAgain.text = "";
 
-	// 점수 등 초기화
+// 	// 점수 등 초기화
 
-	if (isYes){
-		score = 0;
-		ballCnt = 3;
-		stageNum = 1;
-		ClearStage();
-		MakeStage();
-	}
-	else{
-		Application.LoadLevel("GameTitle");
-	}
-}
+// 	if (isYes){
+// 		score = 0;
+// 		ballCnt = 3;
+// 		stageNum = 1;
+// 		ClearStage();
+// 		MakeStage();
+// 	}
+// 	else{
+// 		Application.LoadLevel("GameTitle");
+// 	}
+// }

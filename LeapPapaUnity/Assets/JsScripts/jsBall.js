@@ -1,5 +1,4 @@
 ﻿#pragma strict
-
 //var ball : GameObject;
 
 static var MinimumSpeed = 25;
@@ -10,6 +9,7 @@ private var hasBeenLaunched = true;
 
 function Update() {
     
+
     print("공 속도: " + gameObject.GetComponent.<Rigidbody>().velocity);
     //print("각속도 벡터: " + gameObject.GetComponent.<Rigidbody>().angularVelocity);
     if(gameObject.GetComponent.<Rigidbody>().velocity.x > 8) 
@@ -35,7 +35,22 @@ function Update() {
         gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 70);
 
     //if(gameObject.GetComponent.<Rigidbody>().)
+
+
+    var ball: GameObject = GameObject.Find("Ball");
+
+    if (ball.transform.position.z < -5.0){
+            jsGameManager.state = STATE.STOP;
+           Destroy(ball);
+
+    // var text = "Your Score is " + score;
+//GameObject.Find("gameOver").transform.FindChild("gameOverPanel").GameObject.SetActive(true);
+    // GUI.Label(new Rect(10,10,100,20), text );
+
+    }
+
 }
+
 
 
 // function Update() {
