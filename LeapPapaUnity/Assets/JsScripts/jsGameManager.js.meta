@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0787805e27fc6ae419a1bedaf60ceca2
-timeCreated: 1541579305
+timeCreated: 1541610683
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -10,6 +10,8 @@ MonoImporter:
   - txtStage: {fileID: 132428395400821440, guid: 2b9ce5baf093cce4e9b8de6c3e75f4bc,
       type: 2}
   - txtTryAgain: {instanceID: 0}
+  - txtResult: {fileID: 132150962931309292, guid: 01f336fd258cd6e4c81a57c4180a07bf,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

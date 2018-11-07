@@ -9,6 +9,7 @@ import System.Collections;
 var txtScore: GUIText;
 var txtStage: GUIText;
 var txtTryAgain: GUIText;
+var txtResult : GUIText;
 
 //게임에 필요한 변수
 static var ballCnt = 3;

@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-function music(){
+static function music(){
         var menu = GameObject.Find("menu") ;
         var audio : AudioSource;
         audio = menu.gameObject.GetComponent(AudioSource);
@@ -28,6 +28,7 @@ function OnGUI() {
 
 
     if(btn4 == true) {
+         music();
         Application.Quit();
     }
 
@@ -39,8 +40,10 @@ function OnGUI() {
         Application.LoadLevel("mainScene");
 
     } else if(btn2 == true) {
+         music();
         return;
     } else if(btn3 == true) {
+         music();
         return;
     }
 
