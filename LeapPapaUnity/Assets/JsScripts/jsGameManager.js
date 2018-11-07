@@ -258,6 +258,14 @@ function gameOver(){
    	//yield WaitForSeconds(0.5);
 }
 
+static function showScore(){
+
+	var txtResult = GameObject.Find("txtResult").GetComponent(GUIText);
+	
+	txtResult.text = "Your score is " + score;
+
+}
+
 //------------------------
 //ball 초기화
 //------------------------
