@@ -6,8 +6,8 @@ import System.Collections;
 
 
 //점수 처리
-//var txtScore: GUIText;
-//var txtStage: GUIText;
+var txtScore: GUIText;
+var txtStage: GUIText;
 var txtTryAgain: GUIText;
 
 //게임에 필요한 변수
@@ -18,7 +18,7 @@ private var stageNum = 1;
 static var score = 0;
 
 //외부 모듈과 공용 변수
-enum STATE {START, STOP, STAGE, RESET, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO};
+enum STATE {START, STOP, STAGE, RESET, CLEAR, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO, END};
 
 
 
@@ -45,7 +45,9 @@ function Update () {
 		case STATE.STAGE :		// 스테이지 만들기
 		 	MakeStage();
 		 	break;
-		
+		case STATE.CLEAR :
+			clear();
+			break;
 		case STATE.RESET :		// 패들, 공 초기위치로 이동
 		 	ResetPosition();
 		 	break;
@@ -57,6 +59,8 @@ function Update () {
 		 	break;
 		case STATE.OUT :		// 공을 잃음
 			SetOut();
+			break;
+		case STATE.END :
 			break;
 
 		// case STATE.BONUS :		// 보너스 처리
@@ -80,22 +84,13 @@ function OnGUI() {
 	//	GUI.DrawTexture(Rect(x,y,20,10), Resources.Load("imgPaddle", Texture2D));
 	//}
 
-	// stage & score
-	/*txtStage.text = "Stage : " + stageNum;
-	txtScore.text = "Score : " + score.ToString("n0");*/
-	
-	// 이부분
-	var txtStage = "Stage : " + stageNum;
-	var txtScore = "Score : " + score;
 
- 	//txtStage.text = "Stage : ";
+	var txtStage = GameObject.Find("txtStage").GetComponent(GUIText);
+	txtStage.text = "Stage : " + stageNum;
 
- // 	GameObject.Find("txtStage").text = "Stage : " + stageNum;
-	// GameObject.Find("txtScore").text = "Score : " + score;
+	var txtScore = GameObject.Find("txtScore").GetComponent(GUIText);
+	txtScore.text = "Score : " + score;
 
- 	// 이부분 
-	GUI.Label(new Rect(10,10,100,20), txtStage );
-	GUI.Label(new Rect(10,30,100,20), txtScore );
 
 }
 
@@ -119,7 +114,6 @@ function OnGUI() {
 
 function MakeStage() {
 
-	
 	var n = stageNum % stageCnt;
 	if(n == 0)
 		n = stageCnt;
@@ -132,7 +126,7 @@ function MakeStage() {
 	}
 
 	if (stageNum > 3){
-		state = STATE.STOP;
+		state = STATE.CLEAR;
 	}
     var px = -2.82;
     var py = 4.27;
@@ -175,14 +169,25 @@ function MakeStage() {
 
 
 }
-
-function gameOver(){
+function musicStop(){
 
 	var musicSound = GameObject.Find("musicSound") ;
     var audio : AudioSource;
     audio = musicSound.gameObject.GetComponent(AudioSource);
     audio.Stop();
 
+}
+function clear(){
+	
+
+	musicStop();
+
+    Application.LoadLevel("clearScene");
+}
+
+function gameOver(){
+
+	musicStop();
 
     Application.LoadLevel("endScene");
 
@@ -245,26 +250,26 @@ function SetHit() {
 	}
 
 	state = STATE.IDLE;
-
+	print(score);
 }
 
 //------------------------
 //블록 파괴함
 //------------------------
 function SetDestroy() {
-	state = STATE.IDLE;
+	// state = STATE.IDLE;
 
-	score += (100 * blockNum);
-	//if (jsBall.speed < 10)
-	// 	jsBall.speed += 0.05; // 공의 속도 증가시키기
+	// score += (100 * blockNum);
+	// //if (jsBall.speed < 10)
+	// // 	jsBall.speed += 0.05; // 공의 속도 증가시키기
 	
 
-	if (GetBlockCount() == 0){
-		stageNum++;
-		ClearStage();
-		state = STATE.STAGE;
-		return;
-	}
+	// if (GetBlockCount() == 0){
+	// 	stageNum++;
+	// 	ClearStage();
+	// 	state = STATE.STAGE;
+	// 	return;
+	// }
 
 	//MakeBonus();
 }

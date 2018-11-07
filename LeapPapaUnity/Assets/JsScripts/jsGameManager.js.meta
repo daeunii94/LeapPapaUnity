@@ -1,11 +1,14 @@
 fileFormatVersion: 2
 guid: 0787805e27fc6ae419a1bedaf60ceca2
-timeCreated: 1540890589
+timeCreated: 1541579305
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - ball: {fileID: 4238620503764128, guid: 96bc32a880bb83e47a939ecd50b39a9c, type: 2}
+  - txtScore: {fileID: 132281384710476970, guid: 5fa0687a154f31244962564409af18d7,
+      type: 2}
+  - txtStage: {fileID: 132428395400821440, guid: 2b9ce5baf093cce4e9b8de6c3e75f4bc,
+      type: 2}
   - txtTryAgain: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

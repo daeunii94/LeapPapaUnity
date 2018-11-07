@@ -1,7 +1,9 @@
-﻿#pragma strict
+#pragma strict
 
 var hit = 1;
 var force = 1.0f;
+
+
 function OnCollisionEnter(coll: Collision) {
 
     // var block = GameObject.FindWithTag("Block1") ;
