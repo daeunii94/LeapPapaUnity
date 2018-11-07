@@ -18,7 +18,7 @@ private var stageNum = 1;
 static var score = 0;
 
 //외부 모듈과 공용 변수
-enum STATE {START, STOP, STAGE, RESET, CLEAR, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO, END};
+enum STATE {START, STOP, STAGE, RESET, CLEAR, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO, END, MENU};
 
 
 
@@ -61,6 +61,9 @@ function Update () {
 			SetOut();
 			break;
 		case STATE.END :
+			break;
+		case STATE.MENU :
+			Application.LoadLevel("menuScene");
 			break;
 
 		// case STATE.BONUS :		// 보너스 처리
