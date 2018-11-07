@@ -5,8 +5,8 @@ function Update () {
 	if(Input.anyKeyDown)
 	{
 		print("애니키:"+Input.anyKeyDown);
-		Application.LoadLevel("mainScene"); //게임화면으로 전환
-		jsGameManager.state = STATE.STAGE;
+		Application.LoadLevel("menuScene"); //게임화면으로 전환
+		jsGameManager.state = STATE.MENU;
 	}
 }
 function OnGUI() {
