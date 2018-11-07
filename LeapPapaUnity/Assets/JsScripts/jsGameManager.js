@@ -128,22 +128,17 @@ function MakeStage() {
 	if (stageNum > 3){
 		state = STATE.CLEAR;
 	}
+
+
     var px = -2.82;
-    var py = 4.27;
-    var pz = 4.35;
+    var py = 5.32;
+    var pz = 3.37;
     var w = 1;
-    var h = 1;
-
-    //
-    // var ball: GameObject = GameObject.Find("Ball");
-    // if(ball.transform.position.x > px && ball.transform.position.y > py && ball.transform.position.z > pz){
-    // 	GUI.Label(new Rect(10,50,100,20),"나갓따" );
-    // }
-
-    //
+	var h = 1;
+	
     var tmp = jsStage.Stage[n - 1];
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 5; i++) {
         var s: String = tmp[i];
         var x = px;
 
@@ -155,7 +150,7 @@ function MakeStage() {
                 continue;
             }
 
-            var block: GameObject = Instantiate(Resources.Load("Prefabs/pf_block" + ch, GameObject));
+            var block: GameObject = Instantiate(Resources.Load("Prefabs/pf_block1", GameObject));
 
             block.transform.position = Vector3(x, py, pz);
             x += w;
@@ -164,6 +159,72 @@ function MakeStage() {
 
         py -= h;
 	}
+
+	var tmp2 = jsStage.Stage2[n - 1];
+
+	var px2 = -2.82;
+    var py2 = 5.32;
+    var pz2 = 2.35;
+  
+
+
+	for (var a = 0; a < 5; a++) {
+        var s2: String = tmp2[a];
+        var x2 = px2;
+
+        for (var b = 0; b < s2.length; b++) {
+            var ch2 = s2.Substring(b, 1);
+			//var ch = 1;
+			if (ch2 == "." || ch2 == " ") {
+                x2 += w;
+                continue;
+            }
+
+            var block2: GameObject = Instantiate(Resources.Load("Prefabs/pf_block2", GameObject));
+
+            block2.transform.position = Vector3(x2, py2, pz2);
+            x2 += w;
+        };
+
+
+        py2 -= h;
+	}
+
+
+	var tmp3 = jsStage.Stage3[n - 1];
+
+	var px3 = -2.82;
+    var py3 = 5.32;
+    var pz3 = 1.33;
+	
+  
+
+
+	for (var c = 0; c < 5; c++) {
+        var s3: String = tmp3[c];
+        var x3 = px3;
+
+        for (var d = 0; d < s3.length; d++) {
+            var ch3 = s3.Substring(d, 1);
+			//var ch = 1;
+			if (ch3 == "." || ch3 == " ") {
+                x3 += w;
+                continue;
+            }
+
+            var block3: GameObject = Instantiate(Resources.Load("Prefabs/pf_block3", GameObject));
+
+            block3.transform.position = Vector3(x3, py3, pz3);
+            x3 += w;
+        };
+
+
+        py3 -= h;
+	}
+
+	
+
+
 	ResetPosition();
 
 
@@ -204,12 +265,8 @@ function gameOver(){
 function ResetPosition() {
 	var ball: GameObject = GameObject.Find("Ball");
 
-	
-
 	//ball.transform.position = Vector3(-0.07,3.63,-2.7);
 	ball.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 10);
-
-
 
 	var paddle : GameObject = GameObject.Find("Leap Motion Controller");
 	
