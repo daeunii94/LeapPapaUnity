@@ -1,5 +1,12 @@
 ﻿#pragma strict
 
+function music(){
+        var menu = GameObject.Find("menu") ;
+        var audio : AudioSource;
+        audio = menu.gameObject.GetComponent(AudioSource);
+        audio.Play();
+}
+
 function OnGUI() {
     var w = Screen.width;
     var h = Screen.height;
@@ -26,6 +33,7 @@ function OnGUI() {
 
     if(btn1 == true) {
 
+        music();
         jsGameManager.state = STATE.STAGE;
 
         Application.LoadLevel("mainScene");
