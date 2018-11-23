@@ -10,6 +10,7 @@ var txtScore: GUIText;
 var txtStage: GUIText;
 var txtTryAgain: GUIText;
 var txtResult : GUIText;
+var timer = 0.0;
 
 //게임에 필요한 변수
 static var ballCnt = 3;
@@ -227,8 +228,6 @@ function MakeStage() {
 	}
 
 	
-
-
 	ResetPosition();
 
 
@@ -312,10 +311,22 @@ function SetHit() {
 	// }
 
 	if (GetBlockCount() == 0){
+		GameObject.Find("Canvas").transform.FindChild("clear_image").gameObject.SetActive(true); 
+
 		stageNum++;
-		ClearStage();
+		// 여기부분 수정
+		timer += Time.deltaTime;
+		if(timer > 2){
+			GameObject.Find("Canvas").transform.FindChild("clear_image").gameObject.SetActive(false);
+		}
+
+		 ClearStage();
+		
+
+
 		state = STATE.STAGE;
 		return;
+		
 	}
 
 	state = STATE.IDLE;
@@ -374,6 +385,7 @@ function ClearStage() {
 	// 		Destroy(obj);
 	// 	}
 	// }
+	
 }
 
 //------------------------

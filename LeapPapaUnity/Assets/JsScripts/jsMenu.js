@@ -7,6 +7,10 @@ static function music(){
         audio.Play();
 }
 
+function Update(){
+    jsGameManager.score = 0;
+}
+
 function OnGUI() {
     var w = Screen.width;
     var h = Screen.height;

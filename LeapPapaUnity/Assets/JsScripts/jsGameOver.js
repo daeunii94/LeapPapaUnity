@@ -27,6 +27,7 @@ function OnGUI(){
         jsMenu.music();
         jsGameManager.state = STATE.STAGE;
 
-        Application.LoadLevel("mainScene");
+        Application.LoadLevel("menuScene");
+
     }
 }
