@@ -136,10 +136,10 @@ function MakeStage() {
 
 
     var px = -2.82;
-    var py = 5.32;
-    var pz = 3.37;
+    var py = 3.624;
+    var pz = 3.5;
     var w = 1;
-	var h = 1;
+	var h = 0.8;
 	
     var tmp = jsStage.Stage[n - 1];
 
@@ -311,13 +311,13 @@ function SetHit() {
 	// }
 
 	if (GetBlockCount() == 0){
-		GameObject.Find("Canvas").transform.FindChild("clear_image").gameObject.SetActive(true); 
+		GameObject.Find("Canvas").transform.Find("clear_image").gameObject.SetActive(true); 
 
 		stageNum++;
 		// 여기부분 수정
 		timer += Time.deltaTime;
 		if(timer > 2){
-			GameObject.Find("Canvas").transform.FindChild("clear_image").gameObject.SetActive(false);
+			GameObject.Find("Canvas").transform.Find("clear_image").gameObject.SetActive(false);
 		}
 
 		 ClearStage();
