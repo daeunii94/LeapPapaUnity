@@ -126,7 +126,7 @@ function OnCollisionEnter(coll: Collision) {
     }
 
     if(coll.collider.gameObject.tag == "FLOOR") {
-        print("땅친당");
+        
         if(gameObject.GetComponent.<Rigidbody>().velocity.z > 0)
            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(0,1,1) * 100);
         else
