@@ -135,8 +135,8 @@ function MakeStage() {
 	}
 
 
-    var px = -2.82;
-    var py = 3.624;
+    var px = -2.52;
+    var py = 3.824;
     var pz = 3.5;
     var w = 1;
 	var h = 0.8;

@@ -12,24 +12,24 @@ function Update() {
 
     print("공 속도: " + gameObject.GetComponent.<Rigidbody>().velocity);
     //print("각속도 벡터: " + gameObject.GetComponent.<Rigidbody>().angularVelocity);
-    if(gameObject.GetComponent.<Rigidbody>().velocity.x > 8) 
-        gameObject.GetComponent.<Rigidbody>().velocity.x = 8;
+    if(gameObject.GetComponent.<Rigidbody>().velocity.x > 7)
+        gameObject.GetComponent.<Rigidbody>().velocity.x = 7;
     
-    if(gameObject.GetComponent.<Rigidbody>().velocity.y > 8)
-        gameObject.GetComponent.<Rigidbody>().velocity.y = 8;
+    if(gameObject.GetComponent.<Rigidbody>().velocity.y > 7)
+        gameObject.GetComponent.<Rigidbody>().velocity.y = 7;
 
-    if(gameObject.GetComponent.<Rigidbody>().velocity.z > 8)
-        gameObject.GetComponent.<Rigidbody>().velocity.z = 8;
+    if(gameObject.GetComponent.<Rigidbody>().velocity.z > 7)
+        gameObject.GetComponent.<Rigidbody>().velocity.z = 7;
 
         
-    if(gameObject.GetComponent.<Rigidbody>().velocity.x < -8) 
-        gameObject.GetComponent.<Rigidbody>().velocity.x = -8;
+    if(gameObject.GetComponent.<Rigidbody>().velocity.x < -7) 
+        gameObject.GetComponent.<Rigidbody>().velocity.x = -7;
 
-    if(gameObject.GetComponent.<Rigidbody>().velocity.y < -8)
-        gameObject.GetComponent.<Rigidbody>().velocity.y = -8;
+    if(gameObject.GetComponent.<Rigidbody>().velocity.y < -7)
+        gameObject.GetComponent.<Rigidbody>().velocity.y = -7;
 
-    if(gameObject.GetComponent.<Rigidbody>().velocity.z < -8)
-        gameObject.GetComponent.<Rigidbody>().velocity.z = -8;
+    if(gameObject.GetComponent.<Rigidbody>().velocity.z < -7)
+        gameObject.GetComponent.<Rigidbody>().velocity.z = -7;
 
     if(gameObject.GetComponent.<Rigidbody>().velocity.z == 0.0) 
         gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 70);
