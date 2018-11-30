@@ -1,45 +1,29 @@
 ﻿#pragma strict
 //var ball : GameObject;
 
-static var MinimumSpeed = 25;
-static var MaximumSpeed = 30;
+//static var MinimumSpeed = 25;
+static var constantSpeed = 5;
 
-static var MinimumVerticalMovement = 0.1F;
-private var hasBeenLaunched = true;
 
 function Update() {
     
 
+   // newObj.GetComponent.<Rigidbody>().GetComponent.<Collider>().enabled = true;
+    gameObject.GetComponent.<Rigidbody>().velocity = constantSpeed * (GetComponent.<Rigidbody>().velocity.normalized);
+
     print("공 속도: " + gameObject.GetComponent.<Rigidbody>().velocity);
     //print("각속도 벡터: " + gameObject.GetComponent.<Rigidbody>().angularVelocity);
-    if(gameObject.GetComponent.<Rigidbody>().velocity.x > 7)
-        gameObject.GetComponent.<Rigidbody>().velocity.x = 7;
     
-    if(gameObject.GetComponent.<Rigidbody>().velocity.y > 7)
-        gameObject.GetComponent.<Rigidbody>().velocity.y = 7;
-
-    if(gameObject.GetComponent.<Rigidbody>().velocity.z > 7)
-        gameObject.GetComponent.<Rigidbody>().velocity.z = 7;
-
-        
-    if(gameObject.GetComponent.<Rigidbody>().velocity.x < -7) 
-        gameObject.GetComponent.<Rigidbody>().velocity.x = -7;
-
-    if(gameObject.GetComponent.<Rigidbody>().velocity.y < -7)
-        gameObject.GetComponent.<Rigidbody>().velocity.y = -7;
-
-    if(gameObject.GetComponent.<Rigidbody>().velocity.z < -7)
-        gameObject.GetComponent.<Rigidbody>().velocity.z = -7;
-
-    if(gameObject.GetComponent.<Rigidbody>().velocity.z == 0.0) 
-        gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 70);
-
+    //gameObject.GetComponent.<Rigidbody>().velocity.x = speed;
+    //gameObject.GetComponent.<Rigidbody>().velocity.y = speed;
+    //gameObject.GetComponent.<Rigidbody>().velocity.z = speed;
     //if(gameObject.GetComponent.<Rigidbody>().)
+
 
 
     var ball: GameObject = GameObject.Find("Ball");
 
-    if (ball.transform.position.z < -5.0){
+    if (ball.transform.position.z < -5.0 || ball.transform.position.z > 7.0){
             jsGameManager.state = STATE.STOP;
            Destroy(ball);
 
@@ -99,27 +83,21 @@ function OnCollisionEnter(coll: Collision) {
     if (coll.collider.gameObject.tag == "BLOCK1") {
         if(jsGameManager.state != STATE.DEMO) 
             coll.collider.gameObject.SendMessage("SetCollision", flag, SendMessageOptions.DontRequireReceiver);
-     
-        
-        //if (Physics.gravity.x > 0) {
-        //    Physics.gravity.x -= 6;
-        //} else {
-        //    Physics.gravity.x += 6;
-        //}
+    
     }
     if(coll.collider.gameObject.tag == "BLOCK1" || coll.collider.gameObject.tag == "FENCE")
         //Physics.gravity.z -= 0.12;
 
     
-    print("이름1:"+coll.collider.gameObject.name);
+    //print("이름1:"+coll.collider.gameObject.name);
     if(coll.collider.gameObject.name == "forearm") {
         //print("패들태그1:" + coll.collider.gameObject.tag);
         //var ball: GameObject = GameObject.Find("Ball");
         //print("오브젝트: " + ball.gameObject.name);
-        print("들어옴1");
+        //print("손뼉쳐1 ");
 
-        print("오브젝트1:" + gameObject.name);
-        gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.forward * 300);
+        //print("오브젝트11:" + gameObject.name);
+        gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(0,1,1) * 1000);
 
 
         //gameObject.GetComponent.<Rigidbody>().AddForce(force, ForceMode.Impulse);
@@ -127,41 +105,41 @@ function OnCollisionEnter(coll: Collision) {
 
     if(coll.collider.gameObject.tag == "FLOOR") {
         
-        if(gameObject.GetComponent.<Rigidbody>().velocity.z > 0)
-           gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(0,1,1) * 100);
+        if(gameObject.GetComponent.<Rigidbody>().velocity.z >= 0)
+           gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(0,3,1) * 200);
         else
-            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(0,1,-1) * 100);
+            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(0,3,-1) * 200);
     }
 
     if(coll.collider.gameObject.name == "Left Wall") {
-        print("z방향1:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
+        //print("z방향1:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
         if(gameObject.GetComponent.<Rigidbody>().velocity.z > 0) {
-            print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
-            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(1,0,1) * 100);
+            //print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
+            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(1,0,1) * 200);
             
         }
         else {
-            print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
-            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(1,0,-1) * 100);
+            //print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
+            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(1,0,-1) * 200);
             
         }
         //print("왼쪽 벽 쳤을때 속도 +-? :" +  gameObject.GetComponent.<Rigidbody>().velocity);
         
-        print("왼쪽 벽 침!");
+        //print("왼쪽 벽 침!");
         //gameObject.GetComponent.<Rigidbody>().AddForce(Vector3.right * 100);
         
     }
     
     if(coll.collider.gameObject.name == "Right Wall") {
-        print("z방향1:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
+        //print("z방향1:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
         if(gameObject.GetComponent.<Rigidbody>().velocity.z > 0) {
-            print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
-            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(-1,0,1) * 150);
+            //print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
+            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(-1,0,1) * 200);
             
         }
         else {
-            print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
-            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(-1,0,-1) * 150);
+            //print("z방향3:"+gameObject.GetComponent.<Rigidbody>().velocity.z);
+            gameObject.GetComponent.<Rigidbody>().AddForce(Vector3(-1,0,-1) * 200);
             
         }
         //print("왼쪽 벽 쳤을때 속도 +-? :" +  gameObject.GetComponent.<Rigidbody>().velocity);
