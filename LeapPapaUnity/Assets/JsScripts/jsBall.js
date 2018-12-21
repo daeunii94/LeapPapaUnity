@@ -4,10 +4,8 @@
 //static var MinimumSpeed = 25;
 static var constantSpeed = 5;
 
-
-function Update() {
+function Update() {    
     
-
    // newObj.GetComponent.<Rigidbody>().GetComponent.<Collider>().enabled = true;
     gameObject.GetComponent.<Rigidbody>().velocity = constantSpeed * (GetComponent.<Rigidbody>().velocity.normalized);
 

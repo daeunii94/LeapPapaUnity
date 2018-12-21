@@ -13,17 +13,21 @@ var txtResult : GUIText;
 var timer = 0.0;
 var now = 0.0; 
 
-//게임에 필요한 변수
 static var ballCnt = 3;
 
 private var stageCnt = 5;
 private var stageNum = 1;
 static var score = 0;
 
+var gameTime : int;
+
+//게임에 필요한 변수
 //외부 모듈과 공용 변수
 enum STATE {START, STOP, STAGE, RESET, CLEAR, HIT, DESTROY, OUT, BONUS, IDLE, READY, DEMO, END, MENU};
 
 
+static var t:int;
+static var ellapsed:int;
 
 static var state: STATE = STATE.START;
 static var blockNum: int;
@@ -46,7 +50,9 @@ function Update () {
 			gameOver();
 			break;
 		case STATE.STAGE :		// 스테이지 만들기
-		 	MakeStage();
+			 MakeStage();
+			 t=Time.time;
+			 TimerStart();
 		 	break;
 		case STATE.CLEAR :
 			clear();
@@ -77,6 +83,17 @@ function Update () {
 	print("State = " + state);	// 디버그용
 }
 
+function TimerStart () {
+	yield WaitForSeconds(15);
+
+	ellapsed=Time.time-t;
+
+	print("시간3:"+ellapsed);
+	if(ellapsed>14) {
+		print("그만3!");
+		state = STATE.STOP;
+	}
+}
 
 function OnGUI() {
 	var w = Screen.width;
